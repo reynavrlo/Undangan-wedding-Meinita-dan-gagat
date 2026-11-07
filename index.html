@@ -325,6 +325,11 @@ function renderMessages(arr) {
     el.innerHTML = '<p style="text-align:center;color:#786967">Belum ada ucapan.</p>';
     return;
   }
+  
+// Memuat ucapan dan statistik saat website dibuka
+document.addEventListener('DOMContentLoaded', () => {
+  loadGuestbook();
+});
 
   arr.forEach(m => {
     const d = document.createElement('div');
