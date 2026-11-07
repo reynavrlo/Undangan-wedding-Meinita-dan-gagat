@@ -317,6 +317,7 @@ function renderStats(arr) {
 }
 
 
+
 function renderMessages(arr) {
   const el = $('messages');
   el.replaceChildren();
@@ -325,11 +326,6 @@ function renderMessages(arr) {
     el.innerHTML = '<p style="text-align:center;color:#786967">Belum ada ucapan.</p>';
     return;
   }
-  
-// Memuat ucapan dan statistik saat website dibuka
-document.addEventListener('DOMContentLoaded', () => {
-  loadGuestbook();
-});
 
   arr.forEach(m => {
     const d = document.createElement('div');
@@ -337,6 +333,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const b = document.createElement('b');
     b.textContent = m.nama;
+
+    const status = document.createElement('small');
+    status.textContent = m.kehadiran === 'Hadir'
+      ? '✓ Hadir'
+      : m.kehadiran === 'Tidak Hadir'
+        ? '✕ Tidak Hadir'
+        : '';
+
+    status.style.display = 'block';
+    status.style.margin = '5px 0';
+    status.style.color = m.kehadiran === 'Hadir' ? '#477a58' : '#a15b5b';
 
     const p = document.createElement('p');
     p.textContent = m.ucapan;
@@ -350,8 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       : '';
 
-    d.append(b, p, s);
-    el.append(d);
+    d.append(b, status, p, s);
+    el.appendChild(d);
   });
 }
 
